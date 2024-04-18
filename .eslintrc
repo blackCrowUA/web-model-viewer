@@ -1,0 +1,168 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "prettier"
+    ],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["plugin:@typescript-eslint/recommended"],
+            "rules": {
+                "prettier/prettier": ["error"],
+                "react-hooks/rules-of-hooks": "error",
+                "react-hooks/exhaustive-deps": [
+                    "warn",
+                    {
+                        "enableDangerousAutofixThisMayCauseInfiniteLoops": true
+                    }
+                ],
+                "react/react-in-jsx-scope": "off",
+                "react/self-closing-comp": [
+                    "error",
+                    {
+                        "component": true,
+                        "html": true
+                    }
+                ],
+                "react/destructuring-assignment": ["error", "always"],
+                "react/no-multi-comp": ["error", { "ignoreStateless": true }],
+                "react/jsx-pascal-case": ["error"],
+                "react/jsx-boolean-value": ["error"],
+                "react/no-array-index-key": ["error"],
+                "react/boolean-prop-naming": [
+                    "error",
+                    { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }
+                ],
+                "react/hook-use-state": ["error"],
+                "react/jsx-no-useless-fragment": ["error"],
+                "react/jsx-sort-props": ["error", {
+                    "callbacksLast": true,
+                    "shorthandFirst": true,
+                    "multiline": "last"
+                }],
+                "@typescript-eslint/naming-convention": [
+                    "error",
+                    {
+                        "format": ["camelCase"],
+                        "selector": [
+                            "classProperty",
+                            "parameterProperty",
+                            "classMethod",
+                            "accessor"
+                        ],
+                        "modifiers": ["private"],
+                        "leadingUnderscore": "require"
+                    }
+                ],
+                "import/first": "error",
+                "import/newline-after-import": "error",
+                "@typescript-eslint/no-explicit-any": "warn",
+                "@typescript-eslint/explicit-function-return-type": [
+                    "error",
+                    {
+                        "allowExpressions": true,
+                        "allowTypedFunctionExpressions": true,
+                        "allowHigherOrderFunctions": true
+                    }
+                ],
+                "@typescript-eslint/prefer-readonly": "error",
+                "@typescript-eslint/array-type": [
+                    "error",
+                    {
+                        "default": "array-simple"
+                    }
+                ],
+                "comma-dangle": [
+                    "error",
+                    {
+                        "arrays": "always-multiline",
+                        "objects": "always-multiline",
+                        "imports": "always-multiline"
+                    }
+                ],
+                "eqeqeq": "error",
+                "prefer-const": "error",
+                "prefer-template": "error",
+                "no-unused-vars": "off",
+                "@typescript-eslint/no-unused-vars": [
+                    "error",
+                    {
+                        "argsIgnorePattern": "^_"
+                    }
+                ],
+                "import/no-duplicates": "error",
+                "import/no-useless-path-segments": "error",
+                "simple-import-sort/imports": [
+                    "error",
+                    {
+                        "groups": [
+                            ["^\\u0000"],
+                            ["^\\u0000.*css", ".*[s]?css"],
+                            ["react"],
+                            ["antd", "@ant-design"],
+                            ["react-router"],
+                            ["react-i18next"],
+                            ["@tanstack"],
+                            ["@testing-library"],
+                            ["^@?\\w"],
+                            ["nm.idl.*"],
+                            ["@api"],
+                            ["@components"],
+                            ["@constants"],
+                            ["@contexts"],
+                            ["@hooks"],
+                            ["@models"],
+                            ["@utils"],
+                            ["components"],
+                            ["constants"],
+                            ["contexts"],
+                            ["hooks"],
+                            ["models"],
+                            ["utils"],
+                            ["pages"],
+                            ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                            ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "files": ["*.js", "*.cjs"],
+            "env": {
+                "node": true
+            }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier",
+        "simple-import-sort",
+        "import"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
+}

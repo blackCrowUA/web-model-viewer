@@ -1,9 +1,8 @@
 //TODO gsplat example
 
-import {initGSPlat} from "./gsplat/main";
+import { initGSPlat } from './gsplat/main';
 
 initGSPlat();
-
 
 //TODO three.js example
 
