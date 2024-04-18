@@ -1,0 +1,12 @@
+.file-loader-component-layout {
+    background: none;
+
+    /* TODO width should changing dynamically */
+    width: 800px;
+    margin-left: calc(50% - 400px);
+    margin-top: 10%;
+}
+
+.upload-component > .ant-upload{
+    background: white;
+}

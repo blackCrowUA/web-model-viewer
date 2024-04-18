@@ -12,12 +12,14 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
     "dist",
-    "assets",
+    "assets"
   ],
   "types": [
     "typePatches"
