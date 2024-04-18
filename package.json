@@ -4,7 +4,11 @@
     "build": "vite build",
     "serve": "vite preview"
   },
-  "dependencies": {
+  "devDependencies": {
     "vite": "^5.2.9"
+  },
+  "dependencies": {
+    "gsplat": "^1.2.4",
+    "three": "^0.163.0"
   }
 }
