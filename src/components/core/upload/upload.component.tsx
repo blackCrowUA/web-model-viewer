@@ -5,8 +5,10 @@ import { Upload as AntUpload } from 'antd';
 
 const { Dragger } = AntUpload;
 
+export type CustomUploadProps = AntUploadProps;
+
 interface UploadProps extends PropsWithChildren {
-  draggerProps?: AntUploadProps;
+  draggerProps?: CustomUploadProps;
 }
 
 export const Upload: FC<UploadProps> = (props) => {
