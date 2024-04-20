@@ -2,7 +2,7 @@ import './file-loader.component.css';
 
 import { FC } from 'react';
 
-import { Upload } from '../../../components/upload/upload.component.tsx';
+import { Upload } from '../../core/upload/upload.component.tsx';
 
 import { FileLoaderContent } from './file-loader-content.component.tsx';
 
