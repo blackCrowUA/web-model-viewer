@@ -1,0 +1,15 @@
+.left-drawer-open-button {
+    position: absolute;
+    z-index: var(--default-z-index);
+    left: 10px;
+    top: 10px;
+}
+
+.left-drawer-main {
+    height: 98% !important;
+    background: var(--white-with-90-opacity) !important;
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 10px;
+    border-radius: 10px;
+}

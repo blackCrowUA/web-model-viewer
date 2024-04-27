@@ -7,12 +7,14 @@ import isNil from 'lodash.isnil';
 
 import { useFiles } from '../../../hooks/files/files.hook.ts';
 
+import { Background } from '../../core/background/background.component.tsx';
+
 export const ModelViewer: FC = () => {
-  const { files } = useFiles();
+  const { selectedFile } = useFiles();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (isNil(files[0])) {
+    if (isNil(selectedFile)) {
       return;
     }
 
@@ -22,20 +24,30 @@ export const ModelViewer: FC = () => {
     const renderer = new WebGLRenderer(canvasRef.current);
     const controls = new OrbitControls(camera, renderer.canvas);
 
-    Loader.LoadFromFileAsync(files[0], scene, (progress) => console.log(`${progress * 100}%`));
+    const loadFileAndStartRendering = async (): Promise<void> => {
+      await Loader.LoadFromFileAsync(selectedFile, scene, (progress) => console.log(`${progress * 100}%`));
 
-    const animate = (): void => {
-      controls.update();
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      const animate = (): void => {
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      };
+
+      animate();
     };
 
-    animate();
+    loadFileAndStartRendering()
+      .then()
+      .catch((error) => console.error('Error loading file', error));
 
     return () => {
       renderer.dispose();
     };
-  }, [files]);
+  }, [selectedFile]);
 
-  return <canvas className={'model-viewer-canvas'} ref={canvasRef} />;
+  return (
+    <Background>
+      <canvas className={'model-viewer-canvas'} ref={canvasRef} />
+    </Background>
+  );
 };

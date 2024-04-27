@@ -1,0 +1,47 @@
+import './home.page.css';
+
+import { FC, useEffect, useState } from 'react';
+
+import { LoadingOutlined } from '@ant-design/icons';
+
+import { FileLoader } from '../../components/app/file-loader/file-loader.component.tsx';
+import { FilePicker } from '../../components/app/file-picker/file-picker.component.tsx';
+import { Background } from '../../components/core/background/background.component.tsx';
+import { CustomContent } from '../../components/core/content/content.component.tsx';
+import { Spinner } from '../../components/core/spiner/spinner.component.tsx';
+
+import { useGetDefaultFile } from '../../hooks/default-file/get-default-file.hook.ts';
+import { useFiles } from '../../hooks/files/files.hook.ts';
+
+export const HomePage: FC = () => {
+  const { setFiles } = useFiles();
+  const { data, isLoading, isError } = useGetDefaultFile();
+  const [isDefaultFileAdded, setIsDefaultFileAdded] = useState(false);
+
+  useEffect(() => {
+    if (!isError && !isLoading && data && !isDefaultFileAdded) {
+      data.uid = 'default';
+      setFiles([data]);
+      setIsDefaultFileAdded(true);
+    }
+  }, [data, isDefaultFileAdded, isError, isLoading, setFiles]);
+
+  return (
+    <Background>
+      {!isDefaultFileAdded && isLoading ? (
+        <Spinner
+          fullscreen
+          className={'home-page-spinner'}
+          indicator={<LoadingOutlined style={{ fontSize: 74 }} />}
+          size={'large'}
+          tip={'Loading default SPLAT model'}
+        />
+      ) : (
+        <CustomContent>
+          <FileLoader />
+          <FilePicker />
+        </CustomContent>
+      )}
+    </Background>
+  );
+};

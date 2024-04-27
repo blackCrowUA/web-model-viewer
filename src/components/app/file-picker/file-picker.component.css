@@ -1,4 +1,16 @@
 .file-picker-component {
     width: 50%;
     margin-left: calc(50% - 25%);
+    margin-top: 2%;
+}
+
+.file-picker-component-list {
+    background: white;
+    border-radius: 8px;
+}
+
+.file-picker-component-list-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
 }
