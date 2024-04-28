@@ -4,8 +4,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 
-import { FileLoader } from '../../components/app/file-loader/file-loader.component.tsx';
-import { FilePicker } from '../../components/app/file-picker/file-picker.component.tsx';
+import { FileManager } from '../../components/app/file-manager/file-manager.component.tsx';
 import { Background } from '../../components/core/background/background.component.tsx';
 import { CustomContent } from '../../components/core/content/content.component.tsx';
 import { Spinner } from '../../components/core/spiner/spinner.component.tsx';
@@ -38,8 +37,7 @@ export const HomePage: FC = () => {
         />
       ) : (
         <CustomContent>
-          <FileLoader />
-          <FilePicker />
+          <FileManager />
         </CustomContent>
       )}
     </Background>

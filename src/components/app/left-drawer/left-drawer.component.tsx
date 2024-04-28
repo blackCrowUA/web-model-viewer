@@ -1,35 +1,68 @@
 import './left-drawer.component.css';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import { SettingTwoTone } from '@ant-design/icons';
+import { CloseOutlined, SettingTwoTone } from '@ant-design/icons';
+
+import { useFiles } from '../../../hooks/files/files.hook.ts';
 
 import { Drawer } from '../../core/drawer/drawer.component.tsx';
 import { IconButton } from '../../core/icon-button/icon-button.component.tsx';
+import { Modal } from '../../core/modal/modal.component.tsx';
+import { FileManager } from '../file-manager/file-manager.component.tsx';
+
+import { LeftDrawerHeader } from './left-drawer-header.component.tsx';
 
 export const LeftDrawer: FC = () => {
-  const [open, setOpen] = useState(false);
+  const { selectedFile } = useFiles();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isFileManagerOpen, setIsFileManagerOpen] = useState(false);
 
-  const handleOpen = (): void => setOpen(!open);
+  useEffect(() => {
+    setIsFileManagerOpen(false);
+  }, [selectedFile]);
+
+  const handleDrawerOpen = (): void => setIsDrawerOpen(!isDrawerOpen);
+
+  const handleFileManagerOpen = (): void => {
+    setIsFileManagerOpen(true);
+    setIsDrawerOpen(false);
+  };
 
   return (
     <>
-      {open ? null : (
+      {isDrawerOpen ? null : (
         <IconButton
           className={'left-drawer-open-button'}
           icon={<SettingTwoTone />}
           size={'large'}
-          onClick={handleOpen}
+          onClick={handleDrawerOpen}
         />
       )}
+      {isFileManagerOpen ? (
+        <Modal
+          className={'left-drawer-main-file-manager'}
+          footer={null}
+          open={isFileManagerOpen}
+          width={'54%'}
+          closeIcon={
+            <IconButton icon={<CloseOutlined />} type={'default'} onClick={() => setIsFileManagerOpen(false)} />
+          }
+        >
+          <FileManager />
+        </Modal>
+      ) : null}
       <Drawer
-        closable
         forceRender
         className={'left-drawer-main'}
+        closable={false}
+        closeIcon={false}
+        extra={<LeftDrawerHeader handleDrawerOpen={handleDrawerOpen} handleFileManagerOpen={handleFileManagerOpen} />}
         mask={false}
-        open={open}
+        open={isDrawerOpen}
         placement={'left'}
-        onClose={handleOpen}
+        title={'View Settings'}
+        onClose={handleDrawerOpen}
       />
     </>
   );
