@@ -63,7 +63,9 @@ export const LeftDrawer: FC = () => {
         placement={'left'}
         title={'View Settings'}
         onClose={handleDrawerOpen}
-      />
+      >
+        <div>Soon...</div>
+      </Drawer>
     </>
   );
 };

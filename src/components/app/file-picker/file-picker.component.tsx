@@ -31,7 +31,8 @@ export const FilePicker: FC = () => {
       setSelectedFile(fileToView);
       navigate(PATHS.VIEW);
     },
-    [navigate, setSelectedFile]
+    //eslint-disable-next-line
+    [navigate]
   );
 
   const listProps: ListProps<FileObject> = {

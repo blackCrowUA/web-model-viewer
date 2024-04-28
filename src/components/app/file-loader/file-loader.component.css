@@ -1,9 +1,8 @@
 .file-loader-component-layout {
     background: none;
 
-    /* TODO width should changing dynamically */
-    width: 800px;
-    margin-left: calc(50% - 400px);
+    width: 50%;
+    margin-left: calc(50% - 25%);
     margin-top: 10%;
 }
 

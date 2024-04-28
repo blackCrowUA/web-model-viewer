@@ -6,7 +6,7 @@ export interface FilesContextProperties {
   files: FileObject[];
   setFiles: (files: FileObject[]) => void;
   selectedFile: FileObject | null;
-  setSelectedFile: (file: FileObject) => void;
+  setSelectedFile: (file: FileObject | null) => void;
 }
 
 export const FilesContext = createContext<FilesContextProperties>({

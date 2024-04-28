@@ -3,51 +3,46 @@ import './model-viewer.component.css';
 import { FC, useEffect, useRef } from 'react';
 
 import { Camera, Loader, OrbitControls, Scene, WebGLRenderer } from 'gsplat';
-import isNil from 'lodash.isnil';
 
-import { useFiles } from '../../../hooks/files/files.hook.ts';
+import { useModelView } from '../../../hooks/model-view/model-view.hook.ts';
 
-import { Background } from '../../core/background/background.component.tsx';
+import { setStopRenderModel } from '../../../utils/canvas-attributes/canvas-attributes.util.ts';
+import { startModelRendering } from '../../../utils/gsplat/model-rendering.util.ts';
 
-export const ModelViewer: FC = () => {
-  const { selectedFile } = useFiles();
+import { FileObject } from '../../../types/file';
+
+interface ModelViewerProps {
+  selectedFile: FileObject;
+}
+
+export const ModelViewer: FC<ModelViewerProps> = ({ selectedFile }) => {
+  const { setRenderer } = useModelView();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (isNil(selectedFile)) {
-      return;
-    }
+    console.log('NEW FILE SELECTED', canvasRef.current);
 
-    const scene = new Scene();
-    const camera = new Camera();
-
-    const renderer = new WebGLRenderer(canvasRef.current);
-    const controls = new OrbitControls(camera, renderer.canvas);
+    const newScene = new Scene();
+    const newCamera = new Camera();
+    const newRenderer = new WebGLRenderer(canvasRef.current);
+    const newControls = new OrbitControls(newCamera, newRenderer.canvas);
 
     const loadFileAndStartRendering = async (): Promise<void> => {
-      await Loader.LoadFromFileAsync(selectedFile, scene, (progress) => console.log(`${progress * 100}%`));
+      await Loader.LoadFromFileAsync(selectedFile, newScene, (progress) => console.log(`${progress * 100}%`));
 
-      const animate = (): void => {
-        controls.update();
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      };
-
-      animate();
+      startModelRendering(newRenderer, newControls, newScene, newCamera);
     };
 
-    loadFileAndStartRendering()
-      .then()
-      .catch((error) => console.error('Error loading file', error));
+    setTimeout(loadFileAndStartRendering, 1000);
+
+    setRenderer(newRenderer);
 
     return () => {
-      renderer.dispose();
+      console.log('cleanup');
+      setStopRenderModel(newRenderer.canvas);
     };
+    //eslint-disable-next-line
   }, [selectedFile]);
 
-  return (
-    <Background>
-      <canvas className={'model-viewer-canvas'} ref={canvasRef} />
-    </Background>
-  );
+  return <canvas className={'model-viewer-canvas'} ref={canvasRef} />;
 };
