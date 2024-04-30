@@ -1,5 +1,7 @@
 import { createContext, FC, PropsWithChildren, useState } from 'react';
 
+import isNil from 'lodash.isnil';
+
 import { FileObject } from '../../types/file';
 
 export interface FilesContextProperties {
@@ -20,7 +22,16 @@ export const FilesContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [files, setFiles] = useState<FileObject[]>([]);
   const [selectedFile, setSelectedFile] = useState<FileObject | null>(null);
 
+  const handleSetSelectedFile = (file: FileObject | null): void => {
+    if (!isNil(file) && file.uid === selectedFile?.uid) {
+      return;
+    }
+    setSelectedFile(file);
+  };
+
   return (
-    <FilesContext.Provider value={{ files, setFiles, selectedFile, setSelectedFile }}>{children}</FilesContext.Provider>
+    <FilesContext.Provider value={{ files, setFiles, selectedFile, setSelectedFile: handleSetSelectedFile }}>
+      {children}
+    </FilesContext.Provider>
   );
 };

@@ -19,8 +19,8 @@ export const HomePage: FC = () => {
 
   useEffect(() => {
     if (!isError && !isLoading && data && !isDefaultFileAdded) {
-      data.uid = 'default';
-      setFiles([data]);
+      data.forEach((file) => (file.uid = file.name));
+      setFiles([...data]);
       setIsDefaultFileAdded(true);
     }
   }, [data, isDefaultFileAdded, isError, isLoading, setFiles]);

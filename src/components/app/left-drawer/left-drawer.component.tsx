@@ -11,6 +11,7 @@ import { IconButton } from '../../core/icon-button/icon-button.component.tsx';
 import { Modal } from '../../core/modal/modal.component.tsx';
 import { FileManager } from '../file-manager/file-manager.component.tsx';
 
+import { LeftDrawerContent } from './left-drawer-content.component.tsx';
 import { LeftDrawerHeader } from './left-drawer-header.component.tsx';
 
 export const LeftDrawer: FC = () => {
@@ -44,7 +45,7 @@ export const LeftDrawer: FC = () => {
           className={'left-drawer-main-file-manager'}
           footer={null}
           open={isFileManagerOpen}
-          width={'54%'}
+          width={'70%'}
           closeIcon={
             <IconButton icon={<CloseOutlined />} type={'default'} onClick={() => setIsFileManagerOpen(false)} />
           }
@@ -64,7 +65,7 @@ export const LeftDrawer: FC = () => {
         title={'View Settings'}
         onClose={handleDrawerOpen}
       >
-        <div>Soon...</div>
+        <LeftDrawerContent />
       </Drawer>
     </>
   );

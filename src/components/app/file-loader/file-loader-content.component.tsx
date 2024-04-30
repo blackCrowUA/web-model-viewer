@@ -8,7 +8,7 @@ export const FileLoaderContent: FC = () => {
       <h1>
         <FileAddTwoTone />
       </h1>
-      <p>Upload your file here</p>
+      <p>Upload your file here (PLY or SPLAT)</p>
     </div>
   );
 };

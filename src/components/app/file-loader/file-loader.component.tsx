@@ -27,12 +27,8 @@ export const FileLoader: FC = () => {
   };
 
   const handleFileUpload = useCallback(
-    (file: FileObject, fileList: FileObject[]) => {
+    (file: FileObject) => {
       if (ACCEPTED_FILE_TYPES.some((type) => file.name.endsWith(type))) {
-        //TODO remove
-        console.log('FILE LOADER', file, fileList);
-        console.log('CONTEXT FILES', files);
-
         setFiles([...files, file]);
 
         //Prevent loading file to server

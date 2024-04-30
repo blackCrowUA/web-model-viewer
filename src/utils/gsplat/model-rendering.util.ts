@@ -37,7 +37,6 @@ export const startModelRendering = (
 
   const render = (): void => {
     if (isRenderingStopped(rendererCanvas)) {
-      console.log('clearing interval');
       controls.dispose();
       renderer.dispose();
       return;
@@ -45,6 +44,7 @@ export const startModelRendering = (
 
     controls.update();
     renderer.render(scene, camera);
+
     requestAnimationFrame(render);
   };
 
